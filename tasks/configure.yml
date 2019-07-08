@@ -1,0 +1,41 @@
+---
+- name: Configure Postfix
+  template:
+    src: main.cf.j2
+    dest: /etc/postfix/main.cf
+  notify: Restart postfix
+
+- name: Add sasl credentials
+  template:
+    src: sasl_passwd.j2
+    dest: /etc/postfix/sasl_passwd
+    mode: '0400'
+  register: _sasl
+  when: postfix_sasl_credentials
+
+- name: Create hashmap db for SMTP relay credentials
+  command: postmap hash:/etc/postfix/sasl_passwd
+  when:
+    - postfix_sasl_credentials
+    - _sasl.changed
+
+- name: Make hashmap db read only
+  file:
+    path: /etc/postfix/sasl_passwd.db
+    mode: '0400'
+  when: postfix_sasl_credentials
+
+- name: Disable SMTP listener
+  lineinfile:
+    path: /etc/postfix/master.cf
+    regexp: '^(smtp.+smtpd)$'
+    line: '#\1'
+    backrefs: yes
+  when: postfix_disable_smtp_listener
+  notify: Restart postfix
+
+- name: Ensure postfix is started and enabled at boot.
+  service:
+    name: postfix
+    state: started
+    enabled: True
