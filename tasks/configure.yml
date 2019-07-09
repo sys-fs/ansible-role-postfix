@@ -8,20 +8,20 @@
 - name: Add sasl credentials
   template:
     src: sasl_passwd.j2
-    dest: /etc/postfix/sasl_passwd
+    dest: /etc/postfix/sasl/sasl_passwd
     mode: '0400'
   register: _sasl
   when: postfix_sasl_credentials is defined
 
 - name: Create hashmap db for SMTP relay credentials
-  command: postmap hash:/etc/postfix/sasl_passwd
+  command: postmap hash:/etc/postfix/sasl/sasl_passwd
   when:
     - postfix_sasl_credentials is defined
     - _sasl.changed
 
 - name: Make hashmap db read only
   file:
-    path: /etc/postfix/sasl_passwd.db
+    path: /etc/postfix/sasl/sasl_passwd.db
     mode: '0400'
   when: postfix_sasl_credentials is defined
 
