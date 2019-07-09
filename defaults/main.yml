@@ -6,7 +6,7 @@ postfix_configuration: []
 # - mydestination: ''
 # - relayhost: '[smtp.example.com]'
 
-postfix_disable_smtp_listener: True
+postfix_enable_smtp_listener: False
 # postfix_sasl_credentials:
 #   username: foo
 #   password: hunter2

@@ -21,7 +21,7 @@ Role Variables
 Configuration to add to main.cf. If left empty creates an empty config file. An
 empty config file is valid: it applies the Postfix defaults.
 
-    postfix_enable_smtp_listener: True
+    postfix_enable_smtp_listener: False
 
 Whether or not to listen for inbound SMTP traffic.
 

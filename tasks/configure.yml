@@ -31,7 +31,7 @@
     regexp: '^(smtp.+smtpd)$'
     line: '#\1'
     backrefs: yes
-  when: postfix_disable_smtp_listener
+  when: not postfix_enable_smtp_listener
   notify: Restart postfix
 
 - name: Ensure postfix is started and enabled at boot.
