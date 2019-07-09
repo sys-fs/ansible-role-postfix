@@ -1,48 +1,46 @@
-Role Name
-=========
+sys_fs.postfix
+==============
 
-A brief description of the role goes here.
+Install and configure Postfix on Debian and Ubuntu.
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should
-be mentioned here. For instance, if the role uses the EC2 module, it may be a
-good idea to mention in this section that the boto package is required.
+This role requires at least Ansible 2.6. Earlier releases may work, but are not
+supported.
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including
-any variables that are in defaults/main.yml, vars/main.yml, and any variables
-that can/should be set via parameters to the role. Any variables that are read
-from other roles and/or the global scope (ie. hostvars, group vars, etc.) should
-be mentioned here as well.
+    postfix_configuration: []
+    # - mydomain: example.com
+    # - myorigin: '$mydomain'
+    # - mydestination: ''
+    # - relayhost: '[smtp.example.com]'
 
-Dependencies
-------------
+Configuration to add to main.cf. If left empty creates an empty config file. An
+empty config file is valid: it applies the Postfix defaults.
 
-A list of other roles hosted on Galaxy should go here, plus any details in
-regards to parameters that may need to be set for other roles, or variables that
-are used from other roles.
+    postfix_enable_smtp_listener: True
+
+Whether or not to listen for inbound SMTP traffic.
+
+    # postfix_sasl_credentials:
+    #   username: foo
+    #   password: hunter2
+    #   host: example.com
+    #   port: 587
+
+Credentials used for SASL authentication against a remote mail server.
 
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables
-passed in as parameters) is always nice for users too:
-
-    - hosts: servers
+    - hosts: mail
       roles:
-         - { role: ansible-role-postfix, x: 42 }
+        - sys_fs.postfix
 
 License
 -------
 
-BSD
-
-Author Information
-------------------
-
-An optional section for the role authors to include contact information, or a
-website (HTML is not allowed).
+MIT
