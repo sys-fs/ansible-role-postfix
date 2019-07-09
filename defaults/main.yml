@@ -1,14 +1,10 @@
 ---
 # defaults file for ansible-role-postfix
 postfix_configuration: []
-# - name: mydomain
-#   value: example.com
-# - name: myorigin
-#   value: '$mydomain'
-# - name: mydestination
-#   value: ''
-# - name: relayhost
-#   value: '[smtp.example.com]'
+# - mydomain: example.com
+# - myorigin: '$mydomain'
+# - mydestination: ''
+# - relayhost: '[smtp.example.com]'
 
 postfix_disable_smtp_listener: True
 # postfix_sasl_credentials:

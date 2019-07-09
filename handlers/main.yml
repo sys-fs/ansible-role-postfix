@@ -1,2 +1,6 @@
 ---
 # handlers file for ansible-role-postfix
+- name: Restart postfix
+  service:
+    name: postfix
+    state: restarted

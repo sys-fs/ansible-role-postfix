@@ -1,3 +1,7 @@
+#jinja2: lstrip_blocks: True
+# Ansible managed
 {% for variable in postfix_configuration %}
-{{ variable.name }} = {{ variable.value }}
+	{% for key, value in variable.items() %}
+{{ key }} = {{ value }}
+	{% endfor %}
 {% endfor %}
