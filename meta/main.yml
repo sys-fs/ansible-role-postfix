@@ -22,3 +22,7 @@ galaxy_info:
     - postfix
     - debian
     - ubuntu
+    - system
+    - networking
+    - mail
+    - email
