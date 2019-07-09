@@ -1,6 +1,7 @@
 ---
 galaxy_info:
   author: Thomas Mannay
+  role_name: postfix
   description: Install and configure Postfix on Debian and Ubuntu.
   license: MIT
 
